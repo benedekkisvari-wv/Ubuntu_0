@@ -48,7 +48,7 @@ sudo netplan apply
 
 ### Add User with home directory
 ```sh
-sudo adduser -m <USERNAME>
+sudo useradd -m <USERNAME>
 ```
 
 ### Add Group
@@ -584,16 +584,21 @@ Follow the interactive prompts to create a new partition. After creating the par
 
 ### Format the new partition for ext4 filesystem
 ```sh
-sudo mkfs.ext4 /dev/sdX1
+sudo mkfs.ext4 -L <Lable Name> /dev/sdX1
 ```
 ### Create a mount point and mount the new partition
 ```sh
 sudo mkdir /mnt/new_partition
 sudo mount /dev/sdX1 /mnt/new_partition
 ```
-### Add the new partition to /etc/fstab for automatic mounting on boot
+### Add the new partition to /etc/fstab for automatic mounting on boot by Label
 ```sh
-echo "/dev/sdX1 /mnt/new_partition ext4 defaults 0 2" | sudo tee -a /etc/fstab
+echo "LABEL=<Lable Name> /mnt/new_partition ext4 defaults 0 2" | sudo tee -a /etc/fstab
+```
+### Remount by Fstab settings
+```sh
+systemctl daemon-reload 
+sudo mount -a
 ```
 ### Delete a partition
 ```sh
