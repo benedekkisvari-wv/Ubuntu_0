@@ -350,6 +350,11 @@ phpinfo();
 sudo systemctl restart apache2
 ```
 
+## Basic HTML
+```html
+<!DOCTYPE html><html><body><h1>Hello World!</h1></body></html>
+```
+
 ## MySQL Database Server Configuration
 1. Install MySQL database server package
 ```sh
