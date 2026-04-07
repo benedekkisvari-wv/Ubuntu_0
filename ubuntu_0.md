@@ -245,6 +245,43 @@ Add the following lines to the hosts file
 <IP_ADDRESS> <HOSTNAME>
 ```
 
+## DHCP and DNS server configuration (dnsmasq)
+
+```sh 
+sudo apt install dnsmasq
+```
+
+Modify the config file at ``/etc/dnsmasq.conf``
+
+### DHCP
+```
+interface=enp1s0
+
+# start address, end address, lease time
+dhcp-range=192.168.1.100,192.168.1.150,12h
+
+# default gateway
+dhcp-option=3,192.168.1.1
+
+# static ip to client
+dhcp-host=aa:bb:cc:dd:ee:ff,192.168.1.101
+```
+
+### DNS
+```
+# Don't read resolv.conf
+no-resolv
+
+# Forward queries
+server=8.8.8.8
+server=8.8.4.4
+
+# Set custom records
+address=/router/192.168.1.1
+local=/example.home/
+domain=exam.local
+```
+
 ## Enable ipv4 forwarding
 1. Edit sysctl configuration file
 ```sh
