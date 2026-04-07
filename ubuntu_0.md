@@ -23,6 +23,8 @@ network:
           via: <Default Gatway>
         - to: default
           via: <IPv6 Address>
+      nameservers:
+        addresses: [8.8.8.8,8.8.4.4]
 ```
 
 Set DHCP
